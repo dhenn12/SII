@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>SII_Ex02_Hennigfeld</title>
+<style>
+  body {
+    background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
+    height: 100%;
+    width 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+  #nav { background-color: black;
+    color: white;
+    width: 100vw;
+    height: 7vh;
+  }
+  .navb { color: white;}
+  th { background-color: green}
+  #river, .row {border: 1px solid black;
+    border-collapse: collapse;
+    width: 470px}
+    th, td {width: 20vw}
+  #sc{
+    display: inline-block;
+    position: relative;
+    font-size: 80;}
+  #right{
+  }
+  #result{
+    color: red;
+  }
+
+</style>
+</head>
+
+<body>
+
+<table id="nav" >
+  <tr>
+    <td><div style="color: grey"> SII_Ex02_Hennigfeld</div>
+    </td>
+    <td><a href="#text" class="navb"> Text</a>
+    </td>
+    <td><a href="#map" class="navb">Map</a>
+    </td>
+    <td><a href="#river" class="navb"> Table</a>
+    </td>
+
+  </tr>
+</table>
+
+<br>
+<br>
+<div id="left" style='float:left;'>
+<div id="text">
+  <h1> Assigment02</h1>
+  <i>Three Rivers in Germany in a table.</i>
+  <br>
+  <b>Furthermore an image of rivers in Germany.</b>
+  <p> You can get more Information at <a href="https://en.wikipedia.org/wiki/List_of_rivers_of_Germany">Wikipedia</a> or <a href="https://www.worldatlas.com/articles/the-major-rivers-of-germany.html">Worldatlas</a>.
+  </div>
+<image id="map" src="https://www.medienwerkstatt-online.de/lws_wissen/bilder/244-1.jpg"></image>
+<table id="river">
+  <tr class="row">
+    <th >Name</th>
+    <th>Length</th>
+  </tr>
+  <tr class="row">
+    <td><center>Elbe</center></td>
+    <td><center>1112 Km</center></td>
+  </tr>
+  <tr class="row">
+    <td><center>Saale</center></td>
+    <td><center>413 Km</center></td>
+  </tr>
+  <tr class="row">
+    <td><center>Weser</center>    </td>
+    <td><center>452 Km</center></td>
+  </tr>
+</table>
+<br>
+</div>
+<div id="right" style='float:left;'>
+  <h1> Assigment03</h1>
+  <form onchange="itz()" target="frame" formmethod="get" action="https://nominatim.openstreetmap.org/search.php?">
+   q:<br>
+   <input onchange="itz()" id="river1" type="text" name="q" list="Rivers" required><br>
+   <datalist id="Rivers">
+      <option value="Elbe">
+      <option value="Ems">
+      <option value="Rhein">
+      <option value="Weser">
+      <option value="Werse">
+      <option value="Wupper">
+</datalist>
+   polygon_geojson:
+   <br><input type="text"  name="polygon_geojson" value="1" readonly ><br>
+   format<br>
+    <input type="text" name="format" value="geojson" readonly ><br>
+   <input id="submit" type="submit" value=Submit disabled>
+ </form>
+ <div id="result">
+ </div>
+<iframe name="frame" on></iframe
+</div>
+
+</body>
+<script>
+function itz(){
+  var river = document.getElementById("river1").value;
+  if(river == "Elbe" || river == "Ems" || river == "Rhein" || river == "Weser" || river == "Werse" || river == "Wupper"){
+
+   console.log("success");
+   document.getElementById("result").innerHTML="";
+   document.getElementById("submit").disabled = false;
+  }else{
+    console.log(river);
+    document.getElementById("result").innerHTML="Invalid input for q";
+    document.getElementById("submit").disabled =true;
+  }
+}
+  </script>
+</html>
