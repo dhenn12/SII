@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>SII_Ex02_Hennigfeld</title>
+<title>SII_Ex02_Hennigfeld_Zubel</title>
 <style>
   body {
     background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
@@ -39,13 +39,15 @@
 
 <table id="nav" >
   <tr>
-    <td><div style="color: grey"> SII_Ex02_Hennigfeld</div>
+    <td><div style="color: grey"> SII_Ex02_Hennigfeld_Zubel</div>
     </td>
     <td><a href="#text" class="navb"> Text</a>
     </td>
     <td><a href="#map" class="navb">Map</a>
     </td>
     <td><a href="#river" class="navb"> Table</a>
+    </td>
+    <td><a href="#right" class="navb"> Assignment03</a>
     </td>
 
   </tr>
@@ -84,7 +86,7 @@
 </div>
 <div id="right" style='float:left;'>
   <h1> Assigment03</h1>
-  <form onchange="itz()" target="frame" formmethod="get" action="https://nominatim.openstreetmap.org/search.php?">
+  <form onchange="validate()" target="frame" formmethod="get" action="https://nominatim.openstreetmap.org/search.php?">
    q:<br>
    <input onchange="itz()" id="river1" type="text" name="q" list="Rivers" required><br>
    <datalist id="Rivers">
@@ -108,15 +110,12 @@
 
 </body>
 <script>
-function itz(){
+function validate(){
   var river = document.getElementById("river1").value;
   if(river == "Elbe" || river == "Ems" || river == "Rhein" || river == "Weser" || river == "Werse" || river == "Wupper"){
-
-   console.log("success");
    document.getElementById("result").innerHTML="";
    document.getElementById("submit").disabled = false;
   }else{
-    console.log(river);
     document.getElementById("result").innerHTML="Invalid input for q";
     document.getElementById("submit").disabled =true;
   }
