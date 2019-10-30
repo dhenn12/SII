@@ -1,7 +1,19 @@
 <html>
 <head>
 <title>SII_Ex02_Hennigfeld_Zubel</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+
+
 <style>
+#mapid { height: 400px;
+  width: 400px;
+}
+
   body {
     background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
     height: 100%;
@@ -108,8 +120,34 @@
 <iframe name="frame" on></iframe
 </div>
 
+<div id="mapid"></div>
 </body>
 <script>
+var mymap = L.map('mapid').setView([51.9634, 7.6161], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	maxZoom: 18,
+	id: 'mapbox.streets',
+	accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
+
+var popup = L.popup();
+var marker = L.marker([51.9634, 7.6161]).addTo(mymap);
+var circle = L.circle([51.9634, 7.6161], {
+	color: 'red',
+	fillColor: '#f03',
+	fillOpacity: 0.5,
+	radius: 50000
+}).addTo(mymap);
+function onMapClick(e) {
+	popup
+		.setLatLng(e.latlng)
+		.setContent("You clicked the map at " + e.latlng.toString())
+		.openOn(mymap);
+}
+
+mymap.on('click', onMapClick);
 function validate(){
   var river = document.getElementById("river1").value;
   if(river == "Elbe" || river == "Ems" || river == "Rhein" || river == "Weser" || river == "Werse" || river == "Wupper"){
@@ -120,5 +158,24 @@ function validate(){
     document.getElementById("submit").disabled =true;
   }
 }
+
+function loadRiver() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "https://nominatim.openstreetmap.org/search.php?q=Emmerbach&polygon_geojson=1&format=geojson", false);
+  xhttp.send();
+  var emmerbach = JSON.parse(xhttp.responseText).features[4].geometry.coordinates[0];
+  console.log(emmerbach);
+  emmerbach2 = switchLatLng(emmerbach);
+  var polyline = L.polyline(emmerbach2, {color: 'blue'}).addTo(mymap);
+}
+function switchLatLng(array){
+  var narray = [];
+  for(var i=0; i < array.length; i++){
+    narray.push([array[i][1], array[i][0]]);
+  }
+  console.log(narray);
+  return narray;
+}
+loadRiver();
   </script>
 </html>
