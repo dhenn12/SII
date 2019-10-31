@@ -133,7 +133,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(mymap);
 
 var popup = L.popup();
-var marker = L.marker([51.9634, 7.6161]).addTo(mymap);
+var marker = L.marker([51.9634, 7.6161]).bindPopup("Here is Münster").addTo(mymap);
 var circle = L.circle([51.9634, 7.6161], {
 	color: 'red',
 	fillColor: '#f03',
