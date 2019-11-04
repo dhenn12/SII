@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>SII_Ex02_Hennigfeld_Zubel</title>
+<title>SII_Ex04_Hennigfeld_Zubel</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
@@ -51,7 +51,7 @@
 
 <table id="nav" >
   <tr>
-    <td><div style="color: grey"> SII_Ex02_Hennigfeld_Zubel</div>
+    <td><div style="color: grey"> SII_Ex04_Hennigfeld_Zubel</div>
     </td>
     <td><a href="#text" class="navb"> Text</a>
     </td>
@@ -61,7 +61,8 @@
     </td>
     <td><a href="#right" class="navb"> Assignment03</a>
     </td>
-
+    <td><a href="#mapid" class="navb"> Assignment04</a>
+    </td>
   </tr>
 </table>
 
@@ -163,9 +164,9 @@ function loadRiver() {
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "https://nominatim.openstreetmap.org/search.php?q=Emmerbach&polygon_geojson=1&format=geojson", false);
   xhttp.send();
-  var emmerbach = JSON.parse(xhttp.responseText).features[4].geometry.coordinates[0];
+  var emmerbach = JSON.parse(xhttp.responseText).features[4].geometry.coordinates;
   console.log(emmerbach);
-  emmerbach2 = switchLatLng(emmerbach);
+  emmerbach2 = switchLatLng(emmerbach[1]);
   var polyline = L.polyline(emmerbach2, {color: 'blue'}).addTo(mymap);
 }
 function switchLatLng(array){
